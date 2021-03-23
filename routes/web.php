@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('welcome');
 });
 
 Route::prefix('admin')
@@ -24,5 +25,7 @@ Route::prefix('admin')
     Route::get('/', 'HomeController@index')
     ->name('home');
 });
+
+Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
