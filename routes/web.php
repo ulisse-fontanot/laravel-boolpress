@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', 'HomeController@index')->name('index');
 
+Route::get('/posts', 'PostController@index')->name('guest.post.index');
+
+Route::get('/posts/{slug}', 'PostController@show')->name('guest.post.show');
+
 Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
