@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use App\Post;
 
 class PostController extends Controller
@@ -30,7 +32,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.create');
     }
 
     /**
@@ -41,7 +43,18 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $idUser = Auth::id();
+
+        $newPost = new Post();
+        $newPost->user_id = $idUser;
+        $newPost->slug = Str::slug($data['title']);
+        $newPost->title = $data['title'];
+        $newPost->content = $data['content'];
+
+        $newPost->save();
+
+        return redirect()->route('post.index');
     }
 
     /**
@@ -65,9 +78,16 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+        if ($post) {
+            $data = [
+                'post' => $post
+            ];
+            return view('admin.edit', $data);
+        }
+
+        abort('404');
     }
 
     /**
@@ -77,9 +97,12 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
-        //
+        $data = $request->all();
+        $post->update($data);
+
+        return redirect()->route('post.show', $post);
     }
 
     /**
@@ -88,8 +111,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return redirect()->route('post.index');
     }
 }
