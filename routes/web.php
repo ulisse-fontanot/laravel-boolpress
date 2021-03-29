@@ -18,7 +18,7 @@ Route::get('/', 'HomeController@index')->name('index');
 Route::get('/posts', 'PostController@index')->name('guest.post.index');
 Route::get('/posts/{slug}', 'PostController@show')->name('guest.post.show');
 Route::get('/contatti', 'HomeController@contatti')->name('guest.contatti');
-Route::get('/contatti', 'HomeController@contattiSent')->name('guest.contatti.sent');
+Route::post('/contatti', 'HomeController@contattiSent')->name('guest.contatti.sent');
 Route::get('/inviato', 'HomeController@contattiInviato')->name('guest.contatti.inviato');
 
 Auth::routes();

@@ -8,12 +8,12 @@
         @method('POST')
         <div class="form-group">
             <label for="nomeUtente">NOME</label>
-            <input type="text" class="form-control" id="nomeUtente" aria-describedby="name">
+            <input name="name" type="text" class="form-control" id="nomeUtente">
         </div>
 
         <div class="form-group">
             <label for="exampleInputEmail1">E MAIL</label>
-            <input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp">
+            <input name="email" type="email" class="form-control" id="email">
         </div>
 
         <div class="form-group">

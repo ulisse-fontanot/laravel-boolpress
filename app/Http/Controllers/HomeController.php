@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Lead;
+use App\Mail\SendNewMail;
+use Illuminate\Support\Facades\Mail;
+
 
 class HomeController extends Controller
 {
@@ -29,8 +32,9 @@ class HomeController extends Controller
         $newLead = new Lead();
         $newLead->fill($data);
         $newLead->save();
+        Mail::to('info@boolpress.com')->send(new SendNewMail($newLead));
 
-        return redirect()->route('guest.contatti')->with('status', 'ok');
+        return redirect()->route('guest.contatti.inviato')->with('status', 'ok');
     }
 
     public function contattiInviato()
