@@ -85,7 +85,8 @@
                 </div>
 
                 <div class="links">
-                    <a href=" {{ route('guest.post.index') }} ">posts</a>
+                    <a href=" {{ route('guest.post.index') }} ">POSTS</a>
+                    <a href=" {{ route('guest.contatti') }} ">CONTATTI</a>
                 </div>
             </div>
         </div>
