@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use App\Post;
 use App\Tag;
@@ -58,6 +59,10 @@ class PostController extends Controller
         $newPost->slug = Str::slug($data['title']);
         $newPost->title = $data['title'];
         $newPost->content = $data['content'];
+
+        $cover_path = Storage::put('post_covers', $data['image']);
+        $data['cover'] = $cover_path;
+        $newPost->cover = $data['cover'];
 
         $newPost->save();
 
@@ -114,6 +119,9 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         $data = $request->all();
+        $cover_path = Storage::put('post_covers', $data['image']);
+        $data['cover'] = $cover_path;
+        $post->cover = $data['cover'];
         $post->update($data);
         if (array_key_exists('tags', $data)) {
             $post->tags()->sync($data['tags']);

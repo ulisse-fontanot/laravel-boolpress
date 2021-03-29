@@ -76,7 +76,7 @@
             <div class="col-md-2">
                 <div>
                     <a class="dropdown-item" href="#">Dashboard</a>
-                    <a class="dropdown-item" href="#">Post</a>
+                    <a class="dropdown-item" href="{{ route('post.index') }}">Post</a>
                     <a class="dropdown-item" href="#">Categories</a>
                     <a class="dropdown-item" href="#">Tags</a>
                 </div>

@@ -13,12 +13,17 @@
     </div>
     @endif
 
-    <form action="{{ route('post.update', $post) }}" method="post">
+    <form action="{{ route('post.update', $post) }}" method="post" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="form-group">
             <label for="campo">titolo</label>
             <input name="title" value="{{ $post->title }}" type="text" class="form-control" id="campo">
+        </div>
+
+        <div class="form-group">
+            <label for="campo">titolo</label>
+            <input type="file" class="form-control-file" id="campo" name="image">
         </div>
 
         <div class="form-group">
